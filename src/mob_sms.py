@@ -25,6 +25,9 @@ class MobSmsApi(object):
         """
         sms token 认证
 
+        :param mob_token:
+        :param op_token:
+        :param operator:
         :param md5: android md5 验证码
         :return: 成功返回手机号 失败返回 None
         """
@@ -59,7 +62,7 @@ class MobSmsApi(object):
         t = b.decode()
         d = json.loads(t)
         if d['isValid'] == 1:
-            self._log.bind(data=d).info('mob ret')
+            self._log.bind(data=d).info('mob ret success')
             return d['phone']
         else:
             self._log.bind(data=d).error('mob tech check invalid')
