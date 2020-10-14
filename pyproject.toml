@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "mob_api"
-version = "0.1.0"
-description = ""
+version = "0.1.1"
+description = "mob api used by QiYuTech"
 authors = ["dev <dev@qiyutech.tech>"]
 
 [[tool.poetry.source]]
