@@ -4,10 +4,6 @@ version = "0.1.1"
 description = "mob api used by QiYuTech"
 authors = ["dev <dev@qiyutech.tech>"]
 
-[[tool.poetry.source]]
-name = "aliyun"
-url = "https://mirrors.aliyun.com/pypi/simple"
-default = true
 
 [tool.poetry.dependencies]
 python = "^3.8"
