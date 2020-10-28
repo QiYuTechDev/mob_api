@@ -10,7 +10,7 @@ outdated:
 	poetry show -o
 
 
-update: outdated
+update:
 	poetry update
 	make freeze
 
