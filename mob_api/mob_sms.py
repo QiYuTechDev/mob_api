@@ -5,10 +5,10 @@ import time
 from typing import Optional
 
 import requests
-from pyDes import *
+from pyDes import *  # noqa
 from structlog.stdlib import BoundLogger
 
-__all__ = ['MobSmsApi']
+__all__ = ["MobSmsApi"]
 
 
 class MobSmsApi(object):
@@ -21,7 +21,9 @@ class MobSmsApi(object):
         self._app_key = app_key
         self._app_secret = app_secret
 
-    def sms_verify(self, mob_token: str, op_token: str, operator: str, md5: str) -> Optional[str]:
+    def sms_verify(
+        self, mob_token: str, op_token: str, operator: str, md5: str
+    ) -> Optional[str]:
         """
         sms token 认证
 
@@ -35,37 +37,39 @@ class MobSmsApi(object):
         app_key = self._app_key
 
         data = {
-            'appkey': app_key,
-            'token': mob_token,
-            'opToken': op_token,
-            'operator': operator,
-            'timestamp': int(time.time() * 1000),
-            'md5': md5
+            "appkey": app_key,
+            "token": mob_token,
+            "opToken": op_token,
+            "operator": operator,
+            "timestamp": int(time.time() * 1000),
+            "md5": md5,
         }
 
-        data['sign'] = self._generate_sign(data, self._app_secret)
+        data["sign"] = self._generate_sign(data, self._app_secret)
 
         ret = requests.post(url, json=data)
         if not ret.ok:
-            self._log.bind(ret=ret).error('request mob tech failed')
+            self._log.bind(ret=ret).error("request mob tech failed")
             return None
 
         ret = ret.json()
 
-        if ret['status'] != 200:
-            self._log.bind(data=ret).error('invalid status')
+        if ret["status"] != 200:
+            self._log.bind(data=ret).error("invalid status")
             return None
 
-        k = des(self._app_secret[:8], CBC, "00000000", pad=None, padmode=PAD_PKCS5)
-        b: bytes = k.decrypt(base64.b64decode(ret['res']))
+        k = des(  # noqa
+            self._app_secret[:8], CBC, "00000000", pad=None, padmode=PAD_PKCS5  # noqa
+        )
+        b: bytes = k.decrypt(base64.b64decode(ret["res"]))
         # b'{"isValid":1,"phone":"18600825785","valid":true}'
         t = b.decode()
         d = json.loads(t)
-        if d['isValid'] == 1:
-            self._log.bind(data=d).info('mob ret success')
-            return d['phone']
+        if d["isValid"] == 1:
+            self._log.bind(data=d).info("mob ret success")
+            return d["phone"]
         else:
-            self._log.bind(data=d).error('mob tech check invalid')
+            self._log.bind(data=d).error("mob tech check invalid")
             return None
 
     @staticmethod
@@ -74,4 +78,4 @@ class MobSmsApi(object):
         stmp = sorted(request.items(), key=lambda d: d[0])
         for i in stmp:
             ret += i[0] + "=" + str(i[1]) + "&"
-        return hashlib.md5((ret[:-1] + secret).encode('utf-8')).hexdigest()
+        return hashlib.md5((ret[:-1] + secret).encode("utf-8")).hexdigest()

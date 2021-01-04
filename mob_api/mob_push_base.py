@@ -4,7 +4,7 @@ from typing import Optional
 
 from structlog.stdlib import BoundLogger
 
-__all__ = ['MobPushBase']
+__all__ = ["MobPushBase"]
 
 
 class MobPushBase(object):
@@ -14,7 +14,7 @@ class MobPushBase(object):
     :doc: https://www.mob.com/wiki/detailed/?wiki=MobPushRestAPIfenlei1333&id=136
     """
 
-    s_push_url: str = 'http://api.push.mob.com/v3/push/createPush'
+    s_push_url: str = "http://api.push.mob.com/v3/push/createPush"
 
     def __init__(self, logger: BoundLogger, app_key: str, app_secret: str):
         """
@@ -36,6 +36,6 @@ class MobPushBase(object):
         if data is None:
             str_org = self._app_secret
         else:
-            str_org = '%s%s' % (json.dumps(data), self._app_secret)
+            str_org = "%s%s" % (json.dumps(data), self._app_secret)
 
-        return hashlib.md5(str_org.encode('utf-8')).hexdigest()
+        return hashlib.md5(str_org.encode("utf-8")).hexdigest()
