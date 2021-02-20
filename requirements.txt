@@ -7,7 +7,7 @@ idna==2.10; python_version >= "3.6" and python_full_version < "3.0.0" or python_
 multidict==5.1.0; python_version >= "3.6"
 pydes==2.0.1
 requests==2.25.1; (python_version >= "2.7" and python_full_version < "3.0.0") or (python_full_version >= "3.5.0")
-structlog==20.2.0; python_version >= "3.6"
+structlog==21.1.0; python_version >= "3.6"
 typing-extensions==3.7.4.3; python_version >= "3.6"
-urllib3==1.26.2; python_version >= "2.7" and python_full_version < "3.0.0" or python_full_version >= "3.5.0" and python_version < "4"
+urllib3==1.26.3; python_version >= "2.7" and python_full_version < "3.0.0" or python_full_version >= "3.5.0" and python_version < "4"
 yarl==1.6.3; python_version >= "3.6"
