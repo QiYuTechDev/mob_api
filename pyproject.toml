@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "mob_api"
-version = "0.3.0"
+version = "0.3.1"
 description = "mob api used by QiYuTech"
 authors = ["dev <dev@qiyutech.tech>"]
 
@@ -8,7 +8,7 @@ authors = ["dev <dev@qiyutech.tech>"]
 [tool.poetry.dependencies]
 python = "^3.9"
 aiohttp = ">=3.7,<4"
-structlog = ">=20,<21"
+structlog = ">=21,<22"
 requests = ">=2.24,<3"
 pydes = ">=2,<3"
 
